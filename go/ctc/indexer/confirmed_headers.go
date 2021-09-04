@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math/big"
 	"sync"
-	"time"
 
 	"github.com/ethereum/go-ethereum/core/types"
 )
@@ -74,7 +73,7 @@ func (f *ConfirmedHeaderSelector) NewHead(
 		go func(ii uint64) {
 			defer wg.Done()
 
-			ctxt, cancel := context.WithTimeout(ctx, 5*time.Second)
+			ctxt, cancel := context.WithTimeout(ctx, DefaultConnectionTimeout)
 			defer cancel()
 
 			height := startHeight + ii
